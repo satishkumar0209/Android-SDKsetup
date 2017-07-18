@@ -1,0 +1,126 @@
+Before we start 
+
+1)Mobile device with usb driver
+2)Mobile application APK
+3)Appium set up
+4)Android SDK
+5)Selenium standalone server jar files and webdriver script.
+
+
+Mobile set up:
+
+Enable the developer options--->setting-->
+developer option-->
+selct check box(Stake away check box)-->
+Again select the select box (Usb Debugging)
+Now developer option set in your mobile.
+
+
+2)Mobile application APK
+Take any APK save in your computer and same APK install in your phone.
+
+3)Appium set up:
+Download Appium from appium official site.
+
+
+4)Download Android sdk(32/64 bit)
+Need to download from android offcial site.Kept it one folder
+We need to set path of two folders
+1)Platform tools
+2)Tools
+
+Open terminal-->type adb (Getting this type of error messsage(adb is currently not installed) 
+Again--->Type android(Getting this type of error messsage(android:command not found))
+Why because path is not set.you have to set the path then only you can use the android sdk
+
+Go to android sdk folder-->platform tools--->Here you can see adb file -->press Ctrl+l(you can see the address in address bar)
+Copy the address 
+Go to home folder
+Search for (.bashrc)
+In android sdk,There are multiple hidden files 
+so you have to show hidden files(press control+h)
+Now open .bashrc-->
+Double click
+scroll down completelly
+Bottom of the screen you can see fi
+
+press enter
+
+
+Write the following :
+export PATH=$PATH:'paste'(control s)
+Samething follow the tools:
+
+Finally you can write one line like this 
+Example: export PATH=#PATH:'platform tools path':'tools path'(save the file).
+Now android sdk path is set
+Now open your terminal'
+type
+Adb
+Now you getting all commands for adb
+
+
+Now writ eyour programme in eclipse
+
+5)Download selenium standalone server jar files and download java client jar files
+
+These jar files attach to your eclipse project.
+
+6)write your script
+
+String AppPath = "/home/aj/Pictures/yicuu.apk";
+		
+	@Test
+	public void createAppiumInstance() throws InterruptedException 
+	{
+		try
+		{
+			
+			DesiredCapabilities caps = new DesiredCapabilities();
+//Set the device name
+			caps.setCapability(MobileCapabilityType.DEVICE_NAME, "Redmi");	
+//set the android version
+			caps.setCapability("version", "4.4.4");
+			caps.setCapability("app", AppPath);
+			caps.setCapability("newCommandTimeout", "12000");
+//Set the appium server 
+			driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub/"),caps);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println("Appium session is not created" + e);
+		}
+	
+		
+	
+		driver.findElementByXPath("//android.view.View[@content-desc='Skip']").click();
+	
+	}
+}
+
+Once your script is completed
+Before running your script.you have to start appium server.
+
+
+In ubuntu How to run appium server
+Open terminal ------->Type appium
+wait for 5 to 10 seconds your getting this type of message.
+(Welcome to Appium v1.6.4 (REV d8c8b867bf99c604c89bc848f58d1fae8afd599c)
+[Appium] Appium REST http interface listener started on 0.0.0.0:4723).
+
+Here it is showing your appium version and Appiumserver.
+Now your server is running on 0.0.0.0:4723
+
+
+
+
+
+
+
+
+
+
+
+
